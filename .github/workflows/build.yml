@@ -24,17 +24,20 @@ jobs:
           cache: gradle
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-        with:
-          accept-android-sdk-licenses: false
-
-      - name: Install Android SDK packages
         run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+          yes | /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager \
+            --licenses > /dev/null 2>&1 || true
+          /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager \
+            "platforms;android-34" \
+            "build-tools;34.0.0" \
+            "platform-tools"
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
 
       - name: Build APK
         run: ./gradlew assembleMinApi26Debug
+        env:
+          ANDROID_HOME: /usr/local/lib/android/sdk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
