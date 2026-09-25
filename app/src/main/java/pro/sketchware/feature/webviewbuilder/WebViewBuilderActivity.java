@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ import com.google.android.material.button.MaterialButton;
 import pro.sketchware.R;
 import pro.sketchware.feature.webviewbuilder.adapter.PageListAdapter;
 import pro.sketchware.feature.webviewbuilder.dialog.AddPageDialog;
+import pro.sketchware.feature.webviewbuilder.dialog.EditPageDialog;
 
 public class WebViewBuilderActivity extends AppCompatActivity {
     private EditText etAppName, etPackageName, etVersionName;
@@ -97,7 +99,34 @@ public class WebViewBuilderActivity extends AppCompatActivity {
     }
 
     private void setupPagesList() {
-        pageAdapter = new PageListAdapter(project.pages, (page, position) -> { });
+        pageAdapter = new PageListAdapter(project.pages, new PageListAdapter.OnPageClickListener() {
+            @Override
+            public void onPageClick(WebViewPageModel page, int position) {
+                new EditPageDialog(WebViewBuilderActivity.this, page,
+                        (name, url, navigationTrigger) -> {
+                            page.name = name;
+                            page.activityClass = name;
+                            page.webviewUrl = url;
+                            page.navigationTrigger = navigationTrigger;
+                            pageAdapter.notifyItemChanged(position);
+                        }).show();
+            }
+
+            @Override
+            public void onPageDelete(WebViewPageModel page, int position) {
+                new AlertDialog.Builder(WebViewBuilderActivity.this)
+                        .setTitle("Delete Page")
+                        .setMessage("Delete " + page.name + "?")
+                        .setNegativeButton("Cancel", null)
+                        .setPositiveButton("Delete", (dialog, which) -> {
+                            if (!page.isLandingPage && position < project.pages.size()) {
+                                project.pages.remove(position);
+                                pageAdapter.notifyItemRemoved(position);
+                            }
+                        })
+                        .show();
+            }
+        });
         rvPages.setLayoutManager(new LinearLayoutManager(this));
         rvPages.setAdapter(pageAdapter);
 
@@ -192,4 +221,3 @@ public class WebViewBuilderActivity extends AppCompatActivity {
         });
     }
 }
-
