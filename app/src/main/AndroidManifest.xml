@@ -31,6 +31,12 @@
             android:exported="false"
             android:label="@string/title_activity_icon_creator"
             android:theme="@style/Theme.SketchwarePro" />
+        <activity
+            android:name="pro.sketchware.feature.webviewbuilder.WebViewBuilderActivity"
+            android:label="WebView App Builder"
+            android:theme="@style/Theme.SketchwarePro"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

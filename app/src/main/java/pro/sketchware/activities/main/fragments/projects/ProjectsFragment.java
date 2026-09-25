@@ -144,7 +144,7 @@ public class ProjectsFragment extends DA {
         preference = new DB(requireContext(), "project");
 
         ExtendedFloatingActionButton fab = requireActivity().findViewById(R.id.create_new_project);
-        fab.setOnClickListener((v) -> toProjectSettingsActivity());
+        fab.setOnClickListener((v) -> new pro.sketchware.feature.webviewbuilder.dialog.ProjectTypeChooserDialog(requireContext(), this::toProjectSettingsActivity).show());
         Insetter.builder().margin(WindowInsetsCompat.Type.navigationBars()).applyToView(fab);
 
         binding.swipeRefresh.setOnRefreshListener(this::refreshProjectsList);

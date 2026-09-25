@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0A0E17">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#111827"
+        android:title="WebView App Builder"
+        android:titleTextColor="#E2E8F0" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="App Name" android:textColor="#94A3B8" android:textSize="12sp" />
+            <EditText android:id="@+id/et_app_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="My Awesome App" android:hintTextColor="#475569" android:padding="12dp" android:layout_marginTop="6dp" />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Package Name" android:textColor="#94A3B8" android:textSize="12sp" android:layout_marginTop="16dp" />
+            <EditText android:id="@+id/et_package_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="com.myapp.app" android:hintTextColor="#475569" android:padding="12dp" android:layout_marginTop="6dp" android:fontFamily="monospace" />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Version Name" android:textColor="#94A3B8" android:textSize="12sp" android:layout_marginTop="16dp" />
+            <EditText android:id="@+id/et_version_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:padding="12dp" android:layout_marginTop="6dp" />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PAGES (MAX 4)" android:textColor="#475569" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginTop="24dp" />
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/rv_pages" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:nestedScrollingEnabled="false" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_add_page" style="@style/Widget.MaterialComponents.Button.OutlinedButton" android:layout_width="match_parent" android:layout_height="44dp" android:text="+ Add Page" android:textColor="#3B82F6" android:layout_marginTop="8dp" app:strokeColor="#1E293B" />
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="PERMISSIONS" android:textColor="#475569" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginTop="24dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_card" android:padding="12dp" android:layout_marginTop="8dp">
+                <CheckBox android:id="@+id/cb_internet" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Internet (required)" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_camera" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Camera" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_storage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Storage (Read + Write)" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_contacts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Read Contacts" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_accounts" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Get Accounts" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_phone_state" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Phone State" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_location" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Location (Fine + Coarse)" android:textColor="#E2E8F0" />
+                <CheckBox android:id="@+id/cb_notifications" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Push Notifications" android:textColor="#E2E8F0" />
+            </LinearLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CUSTOM JAVA CODE (optional — injected into MainActivity)" android:textColor="#475569" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginTop="24dp" />
+            <EditText android:id="@+id/et_custom_code" android:layout_width="match_parent" android:layout_height="160dp" android:background="@drawable/bg_code" android:textColor="#E2E8F0" android:textSize="12sp" android:fontFamily="monospace" android:gravity="top|start" android:hint="// Your Java code here&#10;// e.g. Log.d(&quot;App&quot;, &quot;Started&quot;);" android:hintTextColor="#374151" android:padding="12dp" android:layout_marginTop="8dp" android:inputType="textMultiLine" android:scrollbars="vertical" />
+            <com.google.android.material.button.MaterialButton android:id="@+id/btn_build_apk" android:layout_width="match_parent" android:layout_height="52dp" android:text="▶  Build APK" android:textColor="#0F172A" android:textSize="15sp" android:layout_marginTop="24dp" app:backgroundTint="#3B82F6" app:cornerRadius="8dp" />
+            <TextView android:id="@+id/tv_build_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#10B981" android:textSize="12sp" android:fontFamily="monospace" android:layout_marginTop="8dp" android:visibility="gone" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout android:id="@+id/layout_build_console" android:layout_width="match_parent" android:layout_height="200dp" android:orientation="vertical" android:background="#050810" android:visibility="gone">
+        <TextView android:layout_width="match_parent" android:layout_height="32dp" android:text=" ▶ Build Console" android:textColor="#475569" android:textSize="11sp" android:background="#0D1117" android:gravity="center_vertical" android:paddingStart="12dp" />
+        <ScrollView android:id="@+id/sv_console" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="12dp">
+            <LinearLayout android:id="@+id/layout_build_console_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
+
