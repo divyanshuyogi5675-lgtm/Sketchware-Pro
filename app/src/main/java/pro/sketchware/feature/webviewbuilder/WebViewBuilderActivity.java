@@ -32,7 +32,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
     private EditText etCustomCode;
     private TextView tvBuildStatus;
     private LinearLayout layoutBuildConsole;
-    private ScrollView svConsole;
+    private ScrollView svConsole, svBuilder;
 
     private WebViewProjectModel project = new WebViewProjectModel();
     private PageListAdapter pageAdapter;
@@ -59,6 +59,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
         tvBuildStatus = findViewById(R.id.tv_build_status);
         layoutBuildConsole = findViewById(R.id.layout_build_console_content);
         svConsole = findViewById(R.id.sv_console);
+        svBuilder = findViewById(R.id.sv_builder);
 
         cbInternet = findViewById(R.id.cb_internet);
         cbCamera = findViewById(R.id.cb_camera);
@@ -184,7 +185,10 @@ public class WebViewBuilderActivity extends AppCompatActivity {
 
             project.customCode = etCustomCode.getText().toString();
             layoutBuildConsole.setVisibility(View.VISIBLE);
-            layoutBuildConsole.post(() -> svConsole.fullScroll(View.FOCUS_DOWN));
+            layoutBuildConsole.post(() -> {
+                svConsole.fullScroll(View.FOCUS_DOWN);
+                svBuilder.fullScroll(View.FOCUS_DOWN);
+            });
             btnBuild.setEnabled(false);
             btnBuild.setText("Building...");
 
@@ -203,7 +207,10 @@ public class WebViewBuilderActivity extends AppCompatActivity {
             tv.setTextSize(12f);
             tv.setTextColor(0xFFE2E8F0);
             layoutBuildConsole.addView(tv);
-            svConsole.post(() -> svConsole.fullScroll(View.FOCUS_DOWN));
+            svConsole.post(() -> {
+                svConsole.fullScroll(View.FOCUS_DOWN);
+                svBuilder.fullScroll(View.FOCUS_DOWN);
+            });
         });
     }
 

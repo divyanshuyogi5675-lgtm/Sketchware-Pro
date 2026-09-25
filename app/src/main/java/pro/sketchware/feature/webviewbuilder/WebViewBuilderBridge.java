@@ -45,8 +45,9 @@ public class WebViewBuilderBridge {
             log("► Project metadata written ✓");
             log("► Starting compilation (Sketchware build system)...");
             invokeSketchwareBuild(scId);
-        } catch (Exception e) {
-            log("✕ Error: " + e.getMessage());
+        } catch (Throwable e) {
+            String message = e.getMessage();
+            log("✕ BUILD FAILED: " + (message == null || message.trim().isEmpty() ? e.toString() : message));
             StringWriter stackTrace = new StringWriter();
             e.printStackTrace(new PrintWriter(stackTrace));
             log(stackTrace.toString());
