@@ -1,6 +1,9 @@
 package pro.sketchware.feature.webviewbuilder;
 
 import android.os.Bundle;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -30,8 +33,9 @@ public class WebViewBuilderActivity extends AppCompatActivity {
     private CheckBox cbInternet, cbCamera, cbStorage, cbContacts,
             cbAccounts, cbPhoneState, cbLocation, cbNotifications;
     private EditText etCustomCode;
-    private TextView tvBuildStatus;
-    private LinearLayout layoutBuildConsole, layoutBuildConsoleContent;
+    private TextView tvBuildStatus, layoutBuildConsoleContent, tvConsoleHeader;
+    private android.widget.Button btnCopyConsole;
+    private LinearLayout layoutBuildConsole;
     private ScrollView svConsole, svBuilder;
 
     private WebViewProjectModel project = new WebViewProjectModel();
@@ -59,8 +63,25 @@ public class WebViewBuilderActivity extends AppCompatActivity {
         tvBuildStatus = findViewById(R.id.tv_build_status);
         layoutBuildConsole = findViewById(R.id.layout_build_console);
         layoutBuildConsoleContent = findViewById(R.id.layout_build_console_content);
+        tvConsoleHeader = findViewById(R.id.tv_console_header);
+        btnCopyConsole = findViewById(R.id.btn_copy_console);
         svConsole = findViewById(R.id.sv_console);
         svBuilder = findViewById(R.id.sv_builder);
+
+        tvConsoleHeader.setOnClickListener(v -> {
+            boolean expanded = layoutBuildConsole.getLayoutParams().height != dpToPx(360);
+            layoutBuildConsole.getLayoutParams().height = dpToPx(expanded ? 360 : 560);
+            layoutBuildConsole.requestLayout();
+            tvConsoleHeader.setText(expanded
+                    ? "▶ Build Console  (tap to expand)"
+                    : "▼ Build Console  (tap to collapse)");
+            svBuilder.post(() -> svBuilder.fullScroll(View.FOCUS_DOWN));
+        });
+        btnCopyConsole.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setPrimaryClip(ClipData.newPlainText("Build Console", layoutBuildConsoleContent.getText()));
+            Toast.makeText(this, "Full build error copied", Toast.LENGTH_SHORT).show();
+        });
 
         cbInternet = findViewById(R.id.cb_internet);
         cbCamera = findViewById(R.id.cb_camera);
@@ -185,6 +206,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
             }
 
             project.customCode = etCustomCode.getText().toString();
+            layoutBuildConsoleContent.setText("");
             layoutBuildConsole.setVisibility(View.VISIBLE);
             layoutBuildConsole.post(() -> {
                 svConsole.fullScroll(View.FOCUS_DOWN);
@@ -203,16 +225,19 @@ public class WebViewBuilderActivity extends AppCompatActivity {
 
     private void appendLog(String line) {
         runOnUiThread(() -> {
-            TextView tv = new TextView(this);
-            tv.setText(line);
-            tv.setTextSize(12f);
-            tv.setTextColor(0xFFE2E8F0);
-            layoutBuildConsoleContent.addView(tv);
+            if (layoutBuildConsoleContent.length() > 0) {
+                layoutBuildConsoleContent.append("\n");
+            }
+            layoutBuildConsoleContent.append(line);
             svConsole.post(() -> {
                 svConsole.fullScroll(View.FOCUS_DOWN);
                 svBuilder.fullScroll(View.FOCUS_DOWN);
             });
         });
+    }
+
+    private int dpToPx(int dp) {
+        return Math.round(dp * getResources().getDisplayMetrics().density);
     }
 
     private void onBuildComplete(boolean success, String apkPath) {
