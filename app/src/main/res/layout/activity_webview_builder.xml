@@ -25,10 +25,10 @@
             android:padding="16dp">
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="App Name" android:textColor="#94A3B8" android:textSize="12sp" />
-            <EditText android:id="@+id/et_app_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="My Awesome App" android:hintTextColor="#475569" android:padding="12dp" android:layout_marginTop="6dp" />
+            <EditText android:id="@+id/et_app_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="My Awesome App" android:textColorHint="#475569" android:padding="12dp" android:layout_marginTop="6dp" />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Package Name" android:textColor="#94A3B8" android:textSize="12sp" android:layout_marginTop="16dp" />
-            <EditText android:id="@+id/et_package_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="com.myapp.app" android:hintTextColor="#475569" android:padding="12dp" android:layout_marginTop="6dp" android:fontFamily="monospace" />
+            <EditText android:id="@+id/et_package_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:hint="com.myapp.app" android:textColorHint="#475569" android:padding="12dp" android:layout_marginTop="6dp" android:fontFamily="monospace" />
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Version Name" android:textColor="#94A3B8" android:textSize="12sp" android:layout_marginTop="16dp" />
             <EditText android:id="@+id/et_version_name" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_input" android:textColor="#E2E8F0" android:padding="12dp" android:layout_marginTop="6dp" />
@@ -50,7 +50,7 @@
             </LinearLayout>
 
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="CUSTOM JAVA CODE (optional — injected into MainActivity)" android:textColor="#475569" android:textSize="11sp" android:letterSpacing="0.1" android:layout_marginTop="24dp" />
-            <EditText android:id="@+id/et_custom_code" android:layout_width="match_parent" android:layout_height="160dp" android:background="@drawable/bg_code" android:textColor="#E2E8F0" android:textSize="12sp" android:fontFamily="monospace" android:gravity="top|start" android:hint="// Your Java code here&#10;// e.g. Log.d(&quot;App&quot;, &quot;Started&quot;);" android:hintTextColor="#374151" android:padding="12dp" android:layout_marginTop="8dp" android:inputType="textMultiLine" android:scrollbars="vertical" />
+            <EditText android:id="@+id/et_custom_code" android:layout_width="match_parent" android:layout_height="160dp" android:background="@drawable/bg_code" android:textColor="#E2E8F0" android:textSize="12sp" android:fontFamily="monospace" android:gravity="top|start" android:hint="// Your Java code here&#10;// e.g. Log.d(&quot;App&quot;, &quot;Started&quot;);" android:textColorHint="#374151" android:padding="12dp" android:layout_marginTop="8dp" android:inputType="textMultiLine" android:scrollbars="vertical" />
             <com.google.android.material.button.MaterialButton android:id="@+id/btn_build_apk" android:layout_width="match_parent" android:layout_height="52dp" android:text="▶  Build APK" android:textColor="#0F172A" android:textSize="15sp" android:layout_marginTop="24dp" app:backgroundTint="#3B82F6" app:cornerRadius="8dp" />
             <TextView android:id="@+id/tv_build_status" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#10B981" android:textSize="12sp" android:fontFamily="monospace" android:layout_marginTop="8dp" android:visibility="gone" />
         </LinearLayout>
