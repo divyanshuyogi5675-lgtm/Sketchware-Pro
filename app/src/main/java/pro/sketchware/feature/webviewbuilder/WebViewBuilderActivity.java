@@ -184,6 +184,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
 
             project.customCode = etCustomCode.getText().toString();
             layoutBuildConsole.setVisibility(View.VISIBLE);
+            layoutBuildConsole.post(() -> svConsole.fullScroll(View.FOCUS_DOWN));
             btnBuild.setEnabled(false);
             btnBuild.setText("Building...");
 

@@ -3,6 +3,8 @@ package pro.sketchware.feature.webviewbuilder;
 import android.content.Context;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -45,6 +47,9 @@ public class WebViewBuilderBridge {
             invokeSketchwareBuild(scId);
         } catch (Exception e) {
             log("✕ Error: " + e.getMessage());
+            StringWriter stackTrace = new StringWriter();
+            e.printStackTrace(new PrintWriter(stackTrace));
+            log(stackTrace.toString());
             onComplete.accept(false, null);
         }
     }
