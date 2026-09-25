@@ -31,7 +31,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
             cbAccounts, cbPhoneState, cbLocation, cbNotifications;
     private EditText etCustomCode;
     private TextView tvBuildStatus;
-    private LinearLayout layoutBuildConsole;
+    private LinearLayout layoutBuildConsole, layoutBuildConsoleContent;
     private ScrollView svConsole, svBuilder;
 
     private WebViewProjectModel project = new WebViewProjectModel();
@@ -57,7 +57,8 @@ public class WebViewBuilderActivity extends AppCompatActivity {
         btnBuild = findViewById(R.id.btn_build_apk);
         etCustomCode = findViewById(R.id.et_custom_code);
         tvBuildStatus = findViewById(R.id.tv_build_status);
-        layoutBuildConsole = findViewById(R.id.layout_build_console_content);
+        layoutBuildConsole = findViewById(R.id.layout_build_console);
+        layoutBuildConsoleContent = findViewById(R.id.layout_build_console_content);
         svConsole = findViewById(R.id.sv_console);
         svBuilder = findViewById(R.id.sv_builder);
 
@@ -206,7 +207,7 @@ public class WebViewBuilderActivity extends AppCompatActivity {
             tv.setText(line);
             tv.setTextSize(12f);
             tv.setTextColor(0xFFE2E8F0);
-            layoutBuildConsole.addView(tv);
+            layoutBuildConsoleContent.addView(tv);
             svConsole.post(() -> {
                 svConsole.fullScroll(View.FOCUS_DOWN);
                 svBuilder.fullScroll(View.FOCUS_DOWN);
