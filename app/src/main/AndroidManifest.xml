@@ -70,6 +70,10 @@
         <activity
             android:name="com.besome.sketch.projects.MyProjectSettingActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="pro.sketchware.activities.webapkforge.WebApkForgeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <activity android:name="com.besome.sketch.tools.CompileLogActivity" />
         <activity android:name="com.besome.sketch.tools.CollectErrorActivity" />

@@ -48,6 +48,7 @@ import mod.hey.studios.project.ProjectTracker;
 import mod.hey.studios.project.backup.BackupRestoreManager;
 import pro.sketchware.R;
 import pro.sketchware.activities.main.activities.MainActivity;
+import pro.sketchware.activities.webapkforge.WebApkForgeActivity;
 import pro.sketchware.databinding.MyprojectsBinding;
 import pro.sketchware.databinding.SortProjectDialogBinding;
 import pro.sketchware.utility.UI;
@@ -193,6 +194,10 @@ public class ProjectsFragment extends DA {
 
             @Override
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                if (menuItem.getItemId() == R.id.open_apkforge_web_builder) {
+                    startActivity(new Intent(requireContext(), WebApkForgeActivity.class));
+                    return true;
+                }
                 return false;
             }
         };
